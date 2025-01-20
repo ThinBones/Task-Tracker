@@ -1,35 +1,41 @@
 public class Task {
-	private String taskTime;
-	private String taskName;
-	private String taskDesc;
+	private String time;
+	private String name;
+	private String desc;
 
 	public Task(String t, String n, String d) {
-		taskTime = t;
-		taskName = n;
-		taskDesc = d;
+		time = t;
+		name = n;
+		desc = d;
+	}
+
+	public String toString() {
+		String temp;
+		temp = ("Time: " + time + "; Name: " + name + "; Description: " + desc);
+		return temp;
 	}
 
 	public String getTime() {
-		return taskTime;
+		return time;
 	}
 
 	public void setTime(String t) {
-		taskTime = t;
+		time = t;
 	}
 
 	public String getName() {
-		return taskName;
+		return name;
 	}
 
 	public void setName(String n) {
-		taskName = n;
+		name = n;
 	}
 
 	public String getDesc() {
-		return taskDesc;
+		return desc;
 	}
 
 	public void setDesc(String d) {
-		taskDesc = d;
+		desc = d;
 	}
 }

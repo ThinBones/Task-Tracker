@@ -43,29 +43,34 @@ public class Main {
 	
 	public static void makeTask() {
 		String taskTime = "";
-		int hour = 0;
-		int minute = 0;
+		int hour = -1;
+		int minute = -1;
 		String taskName;
 		String taskDescription;
 		boolean validTime = false;
 
+		// this definitely needs to be rewritten but i do not care.
 		while (!validTime) {
-			System.out.println("What hour do you want this task to be done by?");
-			try {
-				hour = scanner.nextInt();
+			while (hour < 0) {
+				System.out.println("What hour do you want this task to be done by?");
+				try {
+					hour = scanner.nextInt();
+				}
+				catch (InputMismatchException e) {
+					System.out.println("Input an integer.");
+					scanner.nextLine();
+				}
 			}
-			catch (InputMismatchException e) {
-				System.out.println("Input an integer.");
-				scanner.nextLine();
-			}
-
-			System.out.println("What minute do you want this task to be done by?");
-			try {
-				minute = scanner.nextInt();
-			}
-			catch (InputMismatchException e) {
-				System.out.println("Input an integer.");
-				scanner.nextLine();
+			
+			while (minute < 0) {
+				System.out.println("What minute do you want this task to be done by?");
+				try {
+					minute = scanner.nextInt();
+				}
+				catch (InputMismatchException e) {
+					System.out.println("Input an integer.");
+					scanner.nextLine();
+				}
 			}
 
 			validTime = validTimeChecker(hour, minute);
@@ -97,11 +102,32 @@ public class Main {
 	}
 
 	public static void clearTask() {
+		int resp = -1;
+		boolean validInput = false;
+		System.out.println("What task should be cleared? (Input index of task.)");
+		while (!validInput) {
+			try {
+				resp = scanner.nextInt();
+				validInput = true;
+			}
+			catch (InputMismatchException e) {
+				System.out.println("Input an integer.");
+				validInput = false;
+			}
+		}
 		
+		try {
+			taskList.remove(resp);
+		}
+		catch (IndexOutOfBoundsException e) {
+			System.out.println("Fuck you.");
+		}
 	}
 
 	public static void viewTasks() {
-
+		for (int i = 0; i < taskList.size(); i++) {
+			System.out.println(i + ". " + taskList.get(i).toString());
+		}
 	}
 
 	public static void editTask() {
